@@ -1,0 +1,29 @@
+# dependencies and build output
+node_modules
+dist
+dist-ssr
+*.tsbuildinfo
+
+# env files (credentials are entered in the UI only)
+.env
+.env.*
+!.env.example
+*.local
+
+# tests
+coverage
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.swp
+*.sw?
+*~
+.DS_Store
+Thumbs.db
