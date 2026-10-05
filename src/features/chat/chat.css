@@ -1,0 +1,356 @@
+.chat {
+  --chat-ground: #141414;
+  --bubble-in: linear-gradient(239deg, #3b3f5e 0%, #373a4e 50%, #32343d 100%);
+  --bubble-out: linear-gradient(239deg, #8849b4 0%, #735acd 50%, #5d6ae5 100%);
+  --meta: #ffffffa3;
+  --chip: #282c42b3;
+  --column: 740px;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--chat-ground);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+@media (max-height: 30rem) {
+  .chat {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .log-area {
+    min-height: 16rem;
+  }
+}
+
+.chat-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 64px;
+  padding: max(12px, env(safe-area-inset-top)) 16px 12px;
+  background: var(--surface);
+}
+
+.avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: linear-gradient(135deg, #08d7f3, #5398ff);
+}
+
+.chat-title {
+  flex: 1;
+  min-width: 0;
+  padding-inline: 4px;
+}
+
+.chat-peer {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-status {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.3px;
+  color: var(--text-faint);
+}
+
+.chat-status-active {
+  color: var(--accent);
+}
+
+.chat-status-stopped {
+  color: var(--danger);
+}
+
+.banners {
+  flex: none;
+  display: grid;
+}
+
+.banners:empty {
+  display: none;
+}
+
+.banner {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  padding: 10px 16px;
+  font-size: 0.875rem;
+}
+
+.banner-warning {
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+.banner-info {
+  color: var(--info);
+  background: var(--info-bg);
+}
+
+.banner-error {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.log-area {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.log {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px 16px 12px;
+  scroll-padding-bottom: 16px;
+}
+
+.log:focus-visible {
+  outline-offset: -3px;
+}
+
+.log-empty {
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.chip {
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  color: #ffffff;
+  background: var(--chip);
+  backdrop-filter: blur(25px);
+}
+
+.message-list {
+  width: 100%;
+  max-width: calc(var(--column) - 32px);
+  margin: auto auto 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.message-outgoing {
+  align-items: flex-end;
+}
+
+.message-incoming + .message-outgoing,
+.message-outgoing + .message-incoming {
+  margin-top: 6px;
+}
+
+.bubble {
+  max-width: min(70%, 34rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0 8px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: var(--bubble-in);
+  line-height: 1.25rem;
+}
+
+.message-outgoing .bubble {
+  border-radius: 16px 6px 16px 16px;
+  background: var(--bubble-out);
+}
+
+@media (max-width: 40rem) {
+  .bubble {
+    max-width: 85%;
+  }
+}
+
+.bubble-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.bubble-meta {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: -3px;
+  font-size: 0.6875rem;
+  line-height: 0.875rem;
+  letter-spacing: 0.3px;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+
+.bubble-status {
+  display: grid;
+}
+
+.bubble-status-failed {
+  color: var(--danger);
+}
+
+.message-problem {
+  max-width: min(70%, 34rem);
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+  margin-bottom: 4px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  text-align: right;
+  font-size: 0.8125rem;
+  line-height: 1rem;
+  color: var(--danger);
+  background: var(--surface);
+}
+
+@media (max-width: 40rem) {
+  .message-problem {
+    max-width: 85%;
+  }
+}
+
+.jump-button {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  min-height: 36px;
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+
+.jump-button:hover:not(:disabled) {
+  background: var(--surface-muted);
+}
+
+.composer {
+  flex: none;
+  width: 100%;
+  max-width: var(--column);
+  margin: 0 auto;
+  padding: 0 16px max(16px, env(safe-area-inset-bottom));
+}
+
+.composer-card {
+  display: grid;
+  padding: 4px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.composer-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.composer-input {
+  flex: 1;
+  min-width: 0;
+  resize: none;
+  min-height: 40px;
+  max-height: 40vh;
+  field-sizing: content;
+  padding: 10px 4px 10px 12px;
+  font: inherit;
+  line-height: 1.25rem;
+  color: var(--text);
+  background: none;
+  border: 0;
+  border-radius: 12px;
+}
+
+.composer-input::placeholder {
+  color: var(--text-faint);
+}
+
+.composer-input:focus-visible {
+  outline: none;
+}
+
+.send-button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--on-accent);
+  background: var(--accent);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.send-button:hover {
+  background: var(--accent-hover);
+}
+
+.composer-counter,
+.composer .field-error {
+  padding: 2px 12px 6px;
+}
+
+.composer-counter {
+  justify-self: end;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.composer-counter.is-over {
+  color: var(--danger);
+  font-weight: 500;
+}
